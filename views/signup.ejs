@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penny Pincher - signup</title>
+  <link rel="stylesheet" href="/css/output.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/imgs/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/imgs/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script type="text/javascript">
+    let recaptcha1;
+    var capCall = function () {
+      //Render the recaptcha1 on the element with ID "recaptcha1"
+      recaptcha1 = grecaptcha.render('recaptcha1', {
+        'sitekey': '<%= process.env.RECAPTCHA_SITE_KEY %>',
+        'theme': 'dark'
+      });
+    };
+  </script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=capCall&render=explicit" async defer></script>
+</head>
+
+
+<body class="dark:dark:bg-gray-900 transition-all duration-500 ease-in-out">
+  <%- include('partial.ejs') %>
+    <div class="flex justify-center items-center min-h-screen p-2 ">
+      <div class="app text-center">
+        <% if (locals.messages.errors) { %>
+          <% messages.errors.forEach( el=> {
+            %>
+            <div class="alert alert-danger">
+              <%= el.msg %>
+            </div>
+            <% }) %>
+              <% } %>
+                <header class="flex items-center justify-center gap-2 mb-8">
+                  <h1 class="text-gray-200 playfair-display-reg" style="font-size: 2.5rem">Penny</h1>
+                  <img class="cha-ching-icon" src="/imgs/hand_coin_dollar_finance_icon_125506.png" alt="">
+                  <h1 class="text-gray-200 playfair-display-reg" style="font-size: 2.5rem">Pincher</h1>
+                </header>
+                <form action="/signup" method="POST" class="flex flex-col" id="submit-form">
+                  <input type="text" name="userName" placeholder="Username"
+                    class="input input-bordered w-full mb-4 text-gray-300" required />
+                  <input type="email" name="email" placeholder="Email"
+                    class="input input-bordered w-full mb-4 text-gray-300" required />
+                  <input type="number" name="goal" placeholder="Daily spending goal"
+                    class="input input-bordered w-full mb-4 text-gray-300" />
+                  <input type="password" name="password" placeholder="Password"
+                    class="input input-bordered w-full mb-4 text-gray-300" required />
+                  <input type="password" name="confirmPassword" placeholder="Confirm password"
+                    class="input input-bordered w-full mb-4 text-gray-300" required />
+
+                  <div class="text-center">
+                    <div class="w-[298px] h-[74px] overflow-hidden mt-0 mb-4 mx-auto">
+                      <div id="recaptcha1" class="g-recaptcha relative left-[-2px] top-[-1px]" data-action="SIGNUP">
+                      </div>
+                    </div>
+                  </div>
+
+                  <input value="SIGN UP" type="submit"
+                    class="btn btn-warning dark:bg-blue-300 dark:border-gray-800 dark:hover:bg-gray-300" />
+
+                </form>
+
+      </div>
+    </div>
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+      <aside>
+        <p class="play-regular">Obsidien Engineering: <a href="http://obsidiendev.com"
+            target="_blank">ObsidenDev.com</a></p>
+      </aside>
+    </footer>
+
+</body>
+
+</html>

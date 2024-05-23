@@ -1,0 +1,88 @@
+/* Imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.googleSpan::before {
+  float: left !important;
+  padding-left: 30px !important;
+  margin-top: -32px !important;
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.userName-container {
+  width: auto;
+  height: 30px;
+}
+
+.userName {
+  float: left;
+  padding-top: 2px;
+  padding-left: 8px;
+  position: relative;
+  color: grey;
+}
+
+.btn-google {
+  background-color: #4285F4;
+}
+
+.btn-google:hover {
+  background-color: #71a5f8;
+}
+
+.btn-login {
+  background-color: aquamarine;
+  /* background-color: #e5ab26; */
+}
+
+.darkDiv:before,
+.darkDiv:after {
+  height: 0.125rem;
+  width: 100%;
+  flex-grow: 1;
+  --tw-content: '';
+  content: var(--tw-content);
+  background-color: lightgray;
+}
+
+.play-regular {
+  font-family: "Play", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.play-bold {
+  font-family: "Play", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+.playfair-display {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.playfair-display-reg {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cha-ching-icon {
+  width: 3rem
+}

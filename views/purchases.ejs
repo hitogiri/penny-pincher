@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penny Pincher</title>
+  <link rel="stylesheet" href="/css/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/imgs/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/imgs/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body class="dark:bg-gray-900 duration-500">
+  <%- include('partial.ejs') %>
+    <div class="userName-container dark:bg-gray-900">
+      <% if(user.local.userName){ %>
+        <h4 class="userName">
+          <%= user.local.userName %>
+        </h4>
+        <% } else{ %>
+          <h4 class="userName">
+            <%= user.google.firstName %>
+          </h4>
+          <% } %>
+    </div>
+
+    <div class="flex justify-center items-center min-h-screen p-4 dark:bg-gray-900 ease-in-out">
+      <div class="app text-center">
+        <header class="flex items-center justify-center gap-4 pt-2 mb-8">
+          <h1 class="text-gray-300 playfair-display-reg" style="font-size: 2.5rem">Penny</h1>
+          <img class="cha-ching-icon" src="/imgs/hand_coin_dollar_finance_icon_125506.png" alt="">
+          <h1 class="text-gray-300 playfair-display-reg" style="font-size: 2.5rem">Pincher</h1>
+        </header>
+        <h2 class="text-2xl mb-8 text-gray-200">Purchases</h2>
+        <section class="purchases">
+          <ul class="flex flex-col">
+            <% let totalPrice=0; %>
+              <% purchases.forEach( el=> { %>
+                <li class="purchase-item flex items-center mb-1 input input-bordered pr-0" data-id="<%=el._id%>">
+                  <span class="purchase w-5/6 text-left text-sm md:text-base text-gray-300">
+                    <%= el.purchase %>
+                  </span>
+                  <div class="divider divider-horizontal my-2">
+                  </div>
+                  <span class="price w-1/6 text-right text-xs md:text-base mr-8 text-gray-300">$<%= el.price %></span>
+
+                  <!-- Remove Purchase -->
+                  <form action="purchases/removePurchase/<%= el._id %>?_method=DELETE" method="POST" class="col-3">
+                    <span>
+                      <button class="del h-4 btn btn-error ml-auto" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </button>
+                    </span>
+                  </form>
+
+
+                  </span>
+                </li>
+                <% totalPrice +=el.price; %>
+                  <% }) %>
+          </ul>
+        </section>
+        <div class="divider h-0 darkDiv dark:after:bg-red"></div>
+        <section class="purchases-total mb-4">
+          <ul class="flex flex-col">
+            <li class="purchase-total flex items-center mb-1 input input-bordered pr-0">
+              <span class="total-text w-5/6 text-left text-gray-300"><strong>Total</strong></span>
+              <div class="divider divider-horizontal my-2"></div>
+              <span class="total-calculation w-1/6 text-right mr-8 text-gray-300"><strong>$<%= totalPrice.toFixed(2) %>
+                </strong></span>
+
+              <!-- Remove ALL Purchases -->
+              <form action="purchases/removeAllPurchases/<%= user.id %>?_method=DELETE" method="POST" class="col-3">
+                <button class="del btn btn-error h-4 ml-auto bg-red-500 border-red-500" type="submit">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 delete-all-btn">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </button>
+              </form>
+
+            </li>
+          </ul>
+        </section>
+
+        <section class="remaining-total mb-8">
+          <div class="flex items-center justify-center gap-4">
+            <span class="remaining-text text-xl text-gray-200">Total remaining:</span>
+            <% const remainingAmount=userGoal - totalPrice; %>
+              <span
+                class="remaining-number text-xl <%= remainingAmount >= 0 ? 'text-green-300' : 'text-red-500' %> ml-4">$
+                <%= remainingAmount.toFixed(2) %>
+              </span>
+          </div>
+        </section>
+        <div class="divider mb-8 darkDiv"></div>
+        <h2 class="text-2xl mb-8 text-gray-200">Add Purchase</h2>
+
+        <!-- CreatePurchase -->
+        <form action="/purchases/makePurchase" method="POST">
+          <input type="text" maxlength="27" placeholder="Enter purchase" name="purchaseItem"
+            class="input input-bordered w-full mb-1 text-gray-300" required />
+          <input type="number" step="0.01" placeholder="Enter price (e.g. 3.95)" name="price"
+            class="input input-bordered w-full mb-4 text-gray-300" />
+          <br>
+          <button type="submit" class="btn w-full btn-success mb-4" />Add purchase</button>
+        </form>
+        <div class="divider h-0 darkDiv"></div>
+
+        <!-- Edit Goal -->
+        <form action="/purchases/editGoal" method="POST">
+          <input type="number" step="0.01" name="newGoal" placeholder="Current spending goal: <%= userGoal %>"
+            class="input input-bordered w-full mb-4 text-gray-300" max="9999" required /><br>
+          <button type="submit" class="btn w-full btn-warning mb-8">Edit Goal</button>
+        </form>
+        <a href="/logout" class="btn btn-active btn-ghost mb-8 dark:bg-gray-300">Logout</a>
+      </div>
+    </div>
+    <footer class="footer footer-center bg-base-300 p-4 text-base-content">
+      <aside>
+        <p class="play-regular">Obsidien Engineering: <a href="http://obsidiendev.com"
+            target="_blank">ObsidenDev.com</a></p>
+      </aside>
+    </footer>
+</body>
+
+</html>

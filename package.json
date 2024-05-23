@@ -1,0 +1,41 @@
+{
+  "name": "cha-ching",
+  "version": "1.0.0",
+  "description": "A CRUD application for tracking expenses",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npx tailwindcss -i ./public/css/style.css -o ./public/css/output.css --watch\" \"nodemon server.js\" "
+  },
+  "author": "Obieze Isidienu",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "cron": "^3.1.7",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-flash": "^0.0.2",
+    "express-recaptcha": "^5.1.0",
+    "express-session": "^1.18.0",
+    "method-override": "^3.0.0",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
+    "morgan": "^1.10.0",
+    "passport": "^0.5.3",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "concurrently": "^8.2.2",
+    "daisyui": "^4.10.3",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "tailwindcss": "^3.4.3"
+  }
+}

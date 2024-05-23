@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penny Pincher</title>
+  <link rel="stylesheet" href="/css/output.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/imgs/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/imgs/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body class="dark:bg-gray-900 transition-all duration-500 ease-in-out">
+  <%- include('partial.ejs') %>
+
+    <div class="flex min-h-screen items-center justify-center p-2 dark:bg-gray-900s">
+      <div class="app text-center">
+        <header class="mb-8 flex items-center justify-center gap-2">
+          <h1 class="text-gray-300 playfair-display-reg" style="font-size: 2.5rem">Penny</h1>
+          <img class="cha-ching-icon" src="/imgs/hand_coin_dollar_finance_icon_125506.png" alt="">
+          <h1 class="text-gray-300 playfair-display-reg" style="font-size: 2.5rem">Pincher</h1>
+        </header>
+        <h2 class="mb-8 text-gray-300 md:hidden">
+          Effortlessly track daily spending, set goals, and gain financial
+          clarity. Your key to smart, stress-free money management.
+        </h2>
+        <h2 class="hidden text-gray-400 dark:text-gray-200 md:block playfair-display-reg">
+          Easily monitor your daily expenses, budget successfully, and achieve financial transparency.
+        </h2>
+        <h2 class="mb-8 hidden text-gray-400 dark:text-gray-200 md:block playfair-display-reg">
+          Unlock the door to intelligent, worry-free monetary management.
+        </h2>
+        <div class="flex justify-center gap-2">
+          <button class="btn btn-warning dark:bg-blue-300 dark:border-gray-800" onclick="window.location.href='/login'">
+            Login
+          </button>
+          <button
+            class="btn btn-neutral text-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-400 dark:hover:bg-gray-300 dark:hover:text-gray-900"
+            onclick="window.location.href='/signup'">
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+    <footer class="footer footer-center bg-base-300 p-4 text-base-content">
+      <aside>
+        <p class="play-regular">Obsidien Engineering: <a href="http://obsidiendev.com"
+            target="_blank">ObsidenDev.com</a></p>
+      </aside>
+    </footer>
+</body>
+
+</html>
