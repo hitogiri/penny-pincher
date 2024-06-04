@@ -1,5 +1,5 @@
 {
-  "name": "cha-ching",
+  "name": "penny-pincher",
   "version": "1.0.0",
   "description": "A CRUD application for tracking expenses",
   "main": "server.js",

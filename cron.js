@@ -1,10 +1,10 @@
-// Cron job to hit endpoint every 14 minutes to keep backend alive
+// Cron job to hit endpoint every 15 minutes to keep backend alive
 const cron = require("cron");
 const https = require("https");
 
-const backendUrl = "https://pocket-money.onrender.com/health";
-const job = new cron.CronJob("*/14 * * * *", function () {
-  //This function will be executed every 14 minutes
+const backendUrl = "https://penny-pincher.onrender.com/health";
+const job = new cron.CronJob("*/15 * * * *", function () {
+  //This function will be executed every 15 minutes
   console.log("Checking server status...");
 
   //Perform an HTTPS GET request to hit backend API
